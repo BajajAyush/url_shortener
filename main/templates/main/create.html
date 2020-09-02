@@ -1,0 +1,13 @@
+{% extends 'main/base.html' %}
+
+
+{% block title %} Create New Short url {% endblock %} 
+{% block h1 %} Custom URL Shortener   {% endblock %}
+{% block content %} 
+<form method="post", action="">
+	{% csrf_token %}
+	{{form.as_p}}
+  <button type="submit", name="save">Create Short Url </button>
+	
+</form>
+{% endblock %} 
