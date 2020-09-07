@@ -5,6 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect,HttpResponsePermanent
 from .forms import LinkSubmitForm
 from .models import Long_URL,custom_extension
 from django.db import IntegrityError
+from django.core.exceptions import ObjectDoesNotExist
 def create(response):
 	if response.method == "POST":
 		form  =  LinkSubmitForm(response.POST)
@@ -27,10 +28,13 @@ def create(response):
 	return render(response, "main/create.html", {"form":form})
 
 def go(response, short_id):
-	i = custom_extension.objects.get(extension=short_id)
-	#link = Long_URL.objects.get(short = i)
-	link = get_object_or_404(Long_URL, short = i)
-	#d= str(link[Long_URL])
-	#return HttpResponseRedirect(link)
-	return HttpResponsePermanentRedirect(link.full_url)
-	#return redirect(link.full_url)
+	try:
+		i = custom_extension.objects.get(extension=short_id)
+		#link = Long_URL.objects.get(short = i)
+		link = get_object_or_404(Long_URL, short = i)
+		#d= str(link[Long_URL])
+		#return HttpResponseRedirect(link)
+		return HttpResponsePermanentRedirect(link.full_url)
+		#return redirect(link.full_url)
+	except ObjectDoesNotExist:
+		return render(response, "main/error404.html")
