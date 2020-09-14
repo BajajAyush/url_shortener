@@ -5,10 +5,10 @@
 {% block h1 %} Custom URL Shortener   {% endblock %}
 {% block content %} 
 <form method="post", action="">
-	<div class="form-group">
+
 		{% csrf_token %}
 		{{form.as_p}}
-	    <button type="submit",class="btn btn-danger", name="save">Create Short Url </button>
-	</div>
+	    <button type="submit",class="btn btn-light", name="save">Create Short Url </button>
+	<
 </form>
 {% endblock %} 
