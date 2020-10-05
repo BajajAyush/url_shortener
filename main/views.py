@@ -16,7 +16,7 @@ def create(response):
 				p = custom_extension(extension=t)
 				p.save()
 				Long_URL.objects.create(short=p, full_url=n)
-				messages.success(response, 'Url Shortened Successfully! share dikhe.ga/%s'%(t,))
+				messages.success(response, 'Url Shortened Successfully! share www.dikhe.ga/%s'%(t,))
 				return HttpResponseRedirect("/")
 		except IntegrityError:
 			messages.error(response, 'Sorry extension already taken')
